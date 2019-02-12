@@ -7,3 +7,4 @@ class Square:
         self.image = image
         self.square_color = SquareColor(self.image)
         self.new_file_name = ""
+
