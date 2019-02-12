@@ -46,7 +46,7 @@ class ImageMaker:
         elements = []
         if element is not None:
             for sqr in self.squares:
-                if sqr is not None and not sqr.square_color.has_three_black():
+                if sqr is not None:
                     self.matcher.set_squares(element, sqr)
                     match_right = self.matcher.match_right()
                     if match_right:
