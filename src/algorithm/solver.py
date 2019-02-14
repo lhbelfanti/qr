@@ -3,12 +3,14 @@ from subprocess import call
 from algorithm import ImageMaker
 from PIL import Image
 from squares import Square
+from algorithm import QrCode
 
 
 class Solver:
-    def __init__(self):
+    def __init__(self, size):
         self.squares = []
         self.image_maker = None
+        QrCode.SIZE = size
 
     def solve(self):
         self.crop_squares()

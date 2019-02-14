@@ -1,4 +1,5 @@
 from . import Node
+from algorithm import QrCode
 
 
 class Tree:
@@ -6,7 +7,7 @@ class Tree:
         self.base = Node(first_square, None)
         self.leaves = []
 
-    def get_longest_route(self):
+    def get_longest_routes(self):
         lengths = []
         for node in self.leaves:
             i = 0
@@ -17,12 +18,23 @@ class Tree:
 
             lengths.append(i)
 
-        route_index = lengths.index(max(lengths))
-        route = []
+        # size required = QrCode.SIZE - 1
+        possible_routes = []
+        for i in range(0, len(lengths)):
+            size = lengths[i]
+            if size == (QrCode.SIZE - 1):
+                possible_routes.append(i)
 
-        element = self.leaves[route_index]
-        while element is not None:
-            route.append(element)
-            element = element.parent
+        routes = []
+        for route_index in possible_routes:
+            route = []
 
-        return route[::-1]
+            element = self.leaves[route_index]
+            while element is not None:
+                route.append(element)
+                element = element.parent
+
+            route = route[::-1]
+            routes.append(route)
+
+        return routes

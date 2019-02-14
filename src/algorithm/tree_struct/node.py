@@ -33,3 +33,12 @@ class Node:
                 return True
 
         return False
+
+    def get_distance_to_base(self):
+        distance = 0
+        element = self.parent
+        while element is not None:
+            distance += 1
+            element = element.parent
+
+        return distance

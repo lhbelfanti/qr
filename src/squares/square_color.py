@@ -28,15 +28,11 @@ class SquareColor:
         r, g, b = rgb_im.getpixel((44, 44))
         self.bottom_right_color = RGB(r, g, b)
 
-    def has_three_black(self):
+    def has_two_top_blacks(self):
         blacks = 0
         if self.top_left_color.is_black():
             blacks += 1
         if self.top_right_color.is_black():
             blacks += 1
-        if self.bottom_left_color.is_black():
-            blacks += 1
-        if self.bottom_right_color.is_black():
-            blacks += 1
 
-        return blacks == 3
+        return blacks == 2

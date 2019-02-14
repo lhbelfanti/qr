@@ -1,5 +1,10 @@
 class Matcher:
 
+    TOP = 'top'
+    BOTTOM = 'bottom'
+    LEFT = 'left'
+    RIGHT = 'right'
+
     def __init__(self):
         self.sqr1 = None
         self.sqr2 = None
@@ -75,3 +80,15 @@ class Matcher:
                 sqr.top_right_color.is_white():
             return True
         return False
+
+    def matches(self, position):
+        matches = False
+        if position == Matcher.TOP:
+            matches = self.match_top()
+        elif position == Matcher.BOTTOM:
+            matches = self.match_bottom()
+        elif position == Matcher.LEFT:
+            matches = self.match_left()
+        elif position == Matcher.RIGHT:
+            matches = self.match_right()
+        return matches
