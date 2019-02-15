@@ -19,11 +19,9 @@ class ImageMaker:
 
     def create_image(self):
         self.create_first_row()
-        print("Row 0 found")
 
         for i in range(0, QrCode.SIZE - 1):
             self.create_row(i + 1)
-            print("Row " + str(i + 1) + " found")
 
         print("Finish")
 
@@ -48,6 +46,7 @@ class ImageMaker:
         route = self.qr_code.get_correct_first_row(routes)
 
         self.save_to_image_map(route, 0)
+        print("--- Row 0 found")
 
     def create_row(self, index):
         self.trees = []
@@ -59,23 +58,29 @@ class ImageMaker:
             self.find_branches(self.trees[i].base, i, index, True)
             route = self.trees[i].get_longest_routes()
             print("Tree " + str(i))
+            print("Route length " + str(len(route)))
             if route is not None and len(route) > 0:
                 routes.append(route[0])
 
         if len(routes) > 0:
             self.save_to_image_map(routes[0], index)
+            print("--- Row " + str(index) + " found")
 
     def find_first_element(self, index):
         previous_element = self.image_map[0][index - 1]
-        bottom_squares = self.get_squares(previous_element, Matcher.BOTTOM)
+        bottom_squares = self.get_squares(previous_element, Matcher.BOTTOM_FIRST)
         return bottom_squares
 
     def find_branches(self, node, tree_index, row_index, match_top=False):
-        if node.get_distance_to_base() > QrCode.SIZE:
+        if node.get_distance_to_base() >= (QrCode.SIZE - 1):
             self.trees[tree_index].leaves.append(node)
             return
 
-        possible_squares = self.get_squares(node.square, Matcher.RIGHT)
+        position = Matcher.RIGHT
+        if row_index == (QrCode.SIZE - 1):
+            position = Matcher.RIGHT_LAST
+
+        possible_squares = self.get_squares(node.square, position)
         for i in range(0, len(possible_squares)):
             if match_top:
                 if self.match_second_position(row_index, possible_squares[i], node):
@@ -93,7 +98,12 @@ class ImageMaker:
         distance = parent.get_distance_to_base() + 1
         match_with = self.image_map[distance][row_index - 1]
         self.matcher.set_squares(square, match_with)
-        if self.matcher.matches(Matcher.TOP):
+
+        position = Matcher.TOP
+        if distance == (QrCode.SIZE - 1):
+            position = Matcher.TOP_LAST
+
+        if self.matcher.matches(position):
             return True
 
         return False

@@ -15,3 +15,12 @@ class RGB:
             return True
 
         return False
+
+    def is_white(self):
+        if self.r == 255 and self.g == 255 and self.g == 255:
+            return True
+
+        return False
+
+    def is_black_or_white(self):
+        return self.is_black() or self.is_white()

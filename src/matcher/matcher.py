@@ -1,9 +1,10 @@
 class Matcher:
 
     TOP = 'top'
-    BOTTOM = 'bottom'
-    LEFT = 'left'
+    TOP_LAST = 'top_last'
+    BOTTOM_FIRST = 'bottom_first'
     RIGHT = 'right'
+    RIGHT_LAST = 'right_last'
 
     def __init__(self):
         self.sqr1 = None
@@ -23,32 +24,41 @@ class Matcher:
 
         return False
 
-    def match_bottom(self):
-        if self.sqr1.bottom_left_color.is_black() and self.sqr1.bottom_right_color.is_black():
-            return False
-
-        if self.sqr1.bottom_left_color.matches(self.sqr2.top_left_color) and \
-                self.sqr1.bottom_right_color.matches(self.sqr2.top_right_color):
-            return True
-
-        return False
-
-    def match_left(self):
-        if self.sqr1.bottom_left_color.is_black() and self.sqr1.top_left_color.is_black():
-            return False
-
-        if self.sqr1.bottom_left_color.matches(self.sqr2.bottom_right_color) and \
-                self.sqr1.top_left_color.matches(self.sqr2.top_right_color):
-            return True
-
-        return False
-
     def match_right(self):
         if self.sqr1.bottom_right_color.is_black() and self.sqr1.top_right_color.is_black():
             return False
 
         if self.sqr1.bottom_right_color.matches(self.sqr2.bottom_left_color) and \
                 self.sqr1.top_right_color.matches(self.sqr2.top_left_color):
+            return True
+
+        return False
+
+    def match_bottom_first(self):
+        if self.sqr1.bottom_left_color.is_black() and self.sqr1.bottom_right_color.is_black():
+            return False
+
+        if self.sqr1.bottom_right_color.matches(self.sqr2.top_right_color) and \
+                self.sqr2.top_left_color.is_black_or_white():
+            return True
+
+        return False
+
+    def match_top_last(self):
+        if self.sqr1.top_left_color.is_black() and self.sqr1.top_right_color.is_black():
+            return False
+
+        if self.sqr1.top_left_color.matches(self.sqr2.bottom_left_color) and \
+                self.sqr1.top_right_color.is_black_or_white():
+            return True
+
+        return False
+
+    def match_right_last(self):
+        if self.sqr1.bottom_right_color.is_black() and self.sqr1.top_right_color.is_black():
+            return False
+
+        if self.sqr1.top_right_color.matches(self.sqr2.top_left_color):
             return True
 
         return False
@@ -60,35 +70,17 @@ class Matcher:
             return True
         return False
 
-    def is_top_right_border(self, sqr):
-        if sqr.top_left_color.is_black() and \
-                sqr.bottom_right_color.is_black() and \
-                sqr.top_right_color.is_black():
-            return True
-        return False
-
-    def is_bottom_left_border(self, sqr):
-        if sqr.bottom_right_color.is_black() and \
-                sqr.bottom_left_color.is_black() and \
-                sqr.top_left_color.is_black():
-            return True
-        return False
-
-    def is_bottom_right_border(self, sqr):
-        if sqr.bottom_right_color.is_white() and \
-                sqr.bottom_left_color.is_white() and \
-                sqr.top_right_color.is_white():
-            return True
-        return False
-
     def matches(self, position):
         matches = False
         if position == Matcher.TOP:
             matches = self.match_top()
-        elif position == Matcher.BOTTOM:
-            matches = self.match_bottom()
-        elif position == Matcher.LEFT:
-            matches = self.match_left()
         elif position == Matcher.RIGHT:
             matches = self.match_right()
+        elif position == Matcher.BOTTOM_FIRST:
+            matches = self.match_bottom_first()
+        elif position == Matcher.TOP_LAST:
+            matches = self.match_top_last()
+        elif position == Matcher.RIGHT_LAST:
+            matches = self.match_right_last()
+
         return matches
