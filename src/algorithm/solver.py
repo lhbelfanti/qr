@@ -46,6 +46,7 @@ class Solver:
                 sqr = final_array[0]
 
             sqr.new_file_name = filename
+            sqr.delete_colors()
             sqr.image.save(sqr.new_file_name, "PNG")
 
     def format_number(self, x):
@@ -60,4 +61,4 @@ class Solver:
 
     def join_squares(self):
         call(['montage', '-mode', 'concatenate', '-tile', '20x20',
-              'res/reordered/square_*.png', 'res/reordered/final.png'])
+              'res/reordered/square_*.png', 'res/final/final.png'])
