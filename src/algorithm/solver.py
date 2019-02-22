@@ -4,6 +4,7 @@ from algorithm import ImageMaker
 from PIL import Image
 from squares import Square
 from algorithm import QrCode
+from algorithm import Recolorer
 
 
 class Solver:
@@ -16,6 +17,7 @@ class Solver:
         self.crop_squares()
         self.load_squares()
         self.create_map()
+        self.recolor_map()
         self.save_map()
         self.join_squares()
 
@@ -33,11 +35,17 @@ class Solver:
         self.image_maker.create_map()
         self.image_maker.create_image()
 
+    def recolor_map(self):
+        recolorer = Recolorer(self.image_maker.image_map)
+        #recolorer.recolor_map()  # The result is not the expected
+        recolorer.invert_map()
+        self.image_maker.image_map = recolorer.sqr_map
+
     def save_map(self):
         final_array = []
         for i in range(0, 20):
             for j in range(0, 20):
-                final_array.append(self.image_maker.image_map[j][i])
+                final_array.append(self.image_maker.image_map[i][j])
 
         for x in range(0, len(final_array)):
             sqr = final_array[x]
@@ -46,7 +54,7 @@ class Solver:
                 sqr = final_array[0]
 
             sqr.new_file_name = filename
-            sqr.delete_colors()
+            sqr.delete_red_lines()
             sqr.image.save(sqr.new_file_name, "PNG")
 
     def format_number(self, x):
