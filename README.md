@@ -1,3 +1,18 @@
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="media/qr-dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="media/qr-light.png">
+    <img alt="QR - Program to solve the QR Code Challenge" src="media/qr-dark.png">
+  </picture>
+
+  <br />
+
+  ![GitHub repo size](https://img.shields.io/github/repo-size/lhbelfanti/qr?style=for-the-badge)
+  ![License](https://img.shields.io/github/license/lhbelfanti/qr?style=for-the-badge)
+</div>
+
+---
+
 # QR Code Challenge
 
 ## Problem
@@ -53,3 +68,7 @@ Lastly, I tried another approach and a clean QR was ready to scan!
 <img width="300" alt="Step 7" src="./media/steps/step_07.png" />
 
 The QR is not working anymore but, after scanning it, a popup with a message appeared, and that was the code to solve the challenge.
+
+## Installation
+
+To run this program locally, download the repository and run the file [setup.sh](./setup.sh). This file will do the whole installation for you.
