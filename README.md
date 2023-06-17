@@ -6,6 +6,7 @@
   </picture>
 
   <br />
+  <br />
 
   ![GitHub repo size](https://img.shields.io/github/repo-size/lhbelfanti/qr?style=for-the-badge)
   ![License](https://img.shields.io/github/license/lhbelfanti/qr?style=for-the-badge)
