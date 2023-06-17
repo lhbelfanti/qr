@@ -1,6 +1,7 @@
 from squares import Quadrant
 from squares import RGB
 from algorithm import Processor
+from algorithm import QrCode
 
 
 class Recolorer:
@@ -14,21 +15,21 @@ class Recolorer:
 
     def invert_map(self):
         inverted_map = []
-        for i in range(0, 20):
+        for i in range(0, QrCode.SIZE):
             inverted_map.append([])
-            for j in range(0, 20):
+            for j in range(0, QrCode.SIZE):
                 inverted_map[i].append(None)
 
-        for i in range(0, 20):
-            for j in range(0, 20):
+        for i in range(0, QrCode.SIZE):
+            for j in range(0, QrCode.SIZE):
                 inverted_map[i][j] = self.sqr_map[j][i]
 
         self.sqr_map = inverted_map
 
     def recolor(self):
         self.processor = Processor(self.sqr_map)
-        for i in range(0, 20):
-            for j in range(0, 20):
+        for i in range(0, QrCode.SIZE):
+            for j in range(0, QrCode.SIZE):
                 self.process_square((i, j))
 
     def process_square(self, pos):
@@ -67,7 +68,9 @@ class Recolorer:
         if neighbours is None or len(neighbours) <= 0:
             return None
 
+        i = 0
         for neighbour in neighbours:
+            i += 1
             if neighbour.is_black():
                 blacks += 1
             if neighbour.is_white():

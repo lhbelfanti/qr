@@ -12,9 +12,9 @@ class ImageMaker:
         self.trees = []
 
     def create_map(self):
-        for i in range(0, 20):
+        for i in range(0, QrCode.SIZE):
             self.image_map.append([])
-            for j in range(0, 20):
+            for j in range(0, QrCode.SIZE):
                 self.image_map[i].append(None)
 
     def create_image(self):

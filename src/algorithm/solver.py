@@ -1,4 +1,5 @@
 from subprocess import call
+import os
 
 from algorithm import ImageMaker
 from PIL import Image
@@ -22,7 +23,9 @@ class Solver:
         self.join_squares()
 
     def crop_squares(self):
-        call(['convert', 'res/UGY0EKrw.png', '-crop', '48x48', 'res/cropped/square_%d.png'])
+        if not os.path.exists('./res/cropped'):
+            os.makedirs('./res/cropped')
+        call(['convert', 'res/qr.png', '-crop', '48x48', 'res/cropped/square_%d.png'])
 
     def load_squares(self):
         for i in range(0, 400):
@@ -43,10 +46,12 @@ class Solver:
 
     def save_map(self):
         final_array = []
-        for i in range(0, 20):
-            for j in range(0, 20):
+        for i in range(0, QrCode.SIZE):
+            for j in range(0, QrCode.SIZE):
                 final_array.append(self.image_maker.image_map[i][j])
 
+        if not os.path.exists('./res/reordered'):
+            os.makedirs('./res/reordered')
         for x in range(0, len(final_array)):
             sqr = final_array[x]
             filename = './res/reordered/square_' + self.format_number(x + 1) + '.png'
@@ -68,5 +73,7 @@ class Solver:
         return image_num
 
     def join_squares(self):
+        if not os.path.exists('./res/final'):
+            os.makedirs('./res/final')
         call(['montage', '-mode', 'concatenate', '-tile', '20x20',
               'res/reordered/square_*.png', 'res/final/final.png'])
