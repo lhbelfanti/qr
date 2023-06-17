@@ -72,3 +72,8 @@ The QR is not working anymore but, after scanning it, a popup with a message app
 ## Installation
 
 To run this program locally, download the repository and run the file [setup.sh](./setup.sh). This file will do the whole installation for you.
+
+---
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
