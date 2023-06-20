@@ -1,18 +1,14 @@
-<div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="media/qr-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="media/qr-light.png">
-    <img alt="QR - Program to solve the QR Code Challenge" src="media/qr-dark.png">
-  </picture>
-
-  <br />
-
-  ![GitHub repo size](https://img.shields.io/github/repo-size/lhbelfanti/qr?style=for-the-badge)
-  ![License](https://img.shields.io/github/license/lhbelfanti/qr?style=for-the-badge)
-</div>
+<p align="center">
+  <img src="media/qr-logo.png" width="100" alt="Repository logo" />
+</p>
+<h3 align="center">QR</h3>
+<p align="center">Program to solve the QR Code Challenge<p>
+<p align="center">
+    <img src="https://img.shields.io/github/repo-size/lhbelfanti/qr?label=Repo%20size" alt="Repo size" />
+    <img src="https://img.shields.io/github/license/lhbelfanti/qr?label=License" alt="License" />
+</p>
 
 ---
-
 # QR Code Challenge
 
 ## Problem
